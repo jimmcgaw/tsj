@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{% endblock %}" />
+    <meta name="author" content="{% block meta_author %}{% endblock %}" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0;" />
+    {# TODO: <link rel="shortcut icon" href="/media/images/favicon.ico" /> #}
+    {# TODO: <link rel="apple-touch-icon" href="/media/images/apple-touch-icon.png" /> #}
+    <link rel="stylesheet" href="/media/css/style.css" />
+   <!--[if gte IE 9]>
+  <style type="text/css">
+    .gradient {
+       filter: none;
+    }
+  </style>
+    <![endif]-->
+    {% block extra_head %}{% endblock %}
+    <!--      To enable Modernizr uncomment the below line.     -->
+    <!--<script src="/media/js/modernizr-2.5.3.min.js"></script>-->
+</head>
+
+<body class="body">
+    {# Content #}
+    <div class="container">
+        <header id="banner">
+        <h1><a href="#"></a></h1>
+
+        <nav class="nav"><ul>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#"></a></li>
+        </ul></nav>
+        </header>
+        
+        <div class="main" role="main">
+        <!-- PROMPT IE 6 USERS TO INSTALL CHROME FRAME. REMOVE THIS IF YOU SUPPORT IE 6.
+        chromium.org/developers/how-tos/chrome-frame-getting-started -->
+        <!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+        <!--Block Content-->
+        {% block content %}{% endblock %}
+        <!----End Block---->
+        </div>
+        
+        <footer class="footer">
+        <p><a href="#"></a></p>
+        </footer>
+    </div>
+    {# End Content #}
+    
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/media/js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+    {% block javascript %}{% endblock %}
+
+</body>
+</html>
+
