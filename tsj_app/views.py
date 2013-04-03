@@ -15,6 +15,16 @@ from django.views.decorators.csrf import csrf_exempt
 from tsj_app.models import *
 from tsj_app.model_forms import *
 from tsj_app.forms import *
+from tsj_app import pythonr
 
-def index(request):
-    return render(request, "index.html", locals())
+
+import simplejson
+
+def index(request, template_name="index.html"):
+    return render(request, template_name, locals())
+
+def get_data(request):
+	data = {}
+	data["csv"] = pythonr.get_series_data()
+	json = simplejson.dumps(data)
+	return HttpResponse(json, content_type="application/json")
