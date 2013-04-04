@@ -16,7 +16,7 @@ The list of Python packages you need are listed in the requirements.txt file in 
 
 Once you have pip installed, run the following command inside of your project: `pip install -r requirements.txt`. 
 
-This should install all of the listed packages into your Python environment, including rpy2, the Python bindings for the R environment.
+This should install all of the listed packages into your Python environment, including rpy2, the Python bindings for the R environment. (Pro tip: to avoid cluttering your global Python environment with these packages, create a [virtualenv](http://www.saltycrane.com/blog/2009/05/notes-using-pip-and-virtualenv-django/) for your project.)
 
 ## Running
 Django comes equipped with a small server you can run locally while in development. 
@@ -37,3 +37,35 @@ time_series <- ts(valueVector, freq=12)
 hw <- HoltWinters(time_series)
 predict(hw, 24)
 ```
+
+You will notice that R's forecasting has picked up on our contrived linear pattern, and predicts the next 24 months as values 37-60.
+
+## Forecasting with R from Python
+Let's do the same simple exercise, but this time from within a Python shell. 
+
+To bring up a Python shell, run this inside your project: `python manage.py shell`.
+
+The most difficult part here is importing all of the objects you need from R into the Python environment. Enter the following commands into the shell:
+
+```python 
+# import R stuff
+import rpy2.robjects as ro
+from rpy2.robjects.vectors import IntVector
+
+# set up some basic R functions here
+r = ro.r
+ts = r['ts']
+HoltWinters = r['HoltWinters']
+predict = r['predict']
+
+# Python list containing 1-36
+value_list = range(1, 37)
+# R needs a vector
+value_vector = IntVector(value_list)
+time_series = ts(value_vector, freq=12)
+hw = HoltWinters(time_series)
+predict(hw, 24)
+# if you want forecasted values as a Python list
+list(predict(hw, 24)) 
+```
+

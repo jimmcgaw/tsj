@@ -12,13 +12,9 @@ from rpy2.robjects.vectors import IntVector
 
 # set up some basic R functions here
 r = ro.r
-c = r['c']
 ts = r['ts']
 HoltWinters = r['HoltWinters']
 predict = r['predict']
-unlist = r['unlist']
-warnings = r['warnings']
-data = r['data']
 
 # magic numbers
 MONTHS_TO_PREDICT = 60
