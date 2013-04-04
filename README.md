@@ -24,3 +24,16 @@ Django comes equipped with a small server you can run locally while in developme
 Inside the root directory of this project, run `python manage.py runserver`.
 
 This will start up the server. You can view the demo in your browser at `http://localhost:8000/`.
+
+## Brain-dead Forecasting in R
+Let's do some very simple forecasting in the R environment. Bring up an R shell in your environment of choice and enter the following commands:
+
+```
+# create a vector with values 1-36
+valueVector <- 1:36
+# load the values into a (monthly) timeseries
+time_series <- ts(valueVector, freq=12)
+# generate the forecast data for next 24 months
+hw <- HoltWinters(time_series)
+predict(hw, 24)
+```
