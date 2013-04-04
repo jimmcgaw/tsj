@@ -92,3 +92,10 @@ The Python and Django code that loads the web page (at http://localhost:8000) is
 The HTML for the home page is inside of `templates/index.html`. Note the empty div with an id of "chart" that will hold the chart.
 
 The JavaScript to build the chart itself is located in `media/js/tsj/tsj.js`. This JavaScript file just loads the CSV data, builds the chart, and renders it into the div#chart element in the template.
+
+## Wrapping Up
+This project is loosely based on the code for an old and unfinished project of mine: [PredictCloud](http://www.predictcloud.com/). 
+
+If you have any questions, feel free to get in touch: jpmcgaw (at) gmail.
+
+Thanks!
