@@ -21,9 +21,11 @@ from tsj_app import pythonr
 import simplejson
 
 def index(request, template_name="index.html"):
+	""" loads the home page """
     return render(request, template_name, locals())
 
 def get_data(request):
+	""" Ajax function, returns the CSV data as string for the chart """
 	data = {}
 	data["csv"] = pythonr.get_series_data()
 	json = simplejson.dumps(data)

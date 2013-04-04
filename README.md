@@ -5,7 +5,7 @@ This a small demo project that shows how values loaded into Python can be sent t
 This example uses the Box and Jenkins airline data loaded into Python, R in order to generate a forecast about future data, and JavaScript to plot a chart show both the historical data and future data.
 
 ## Hat Tip
-This project was build using the [Django Web Framework](https://www.djangoproject.com/), and built using the [Django Project Builder](https://github.com/prototypemagic/django-projectbuilder). A basic understanding on my part of doing time series analysis in R was made possible by the book [Introductory Time Series with R](http://www.amazon.com/dp/0387886974/). 
+This project was build using the [Django Web Framework](https://www.djangoproject.com/), and built using the [Django Project Builder](https://github.com/prototypemagic/django-projectbuilder). JavaScript chart visualizations were done with the [dygraphs JS library](http://dygraphs.com/). A basic understanding on my part of doing time series analysis in R was made possible by the book [Introductory Time Series with R](http://www.amazon.com/dp/0387886974/). 
 
 ## Installing
 To get this running on your own local machine, you will need Python and R installed. This has been tested on Mac OS X (Lion), with Python 2.7.1 and R version 2.15.2. 
@@ -24,6 +24,8 @@ Django comes equipped with a small server you can run locally while in developme
 Inside the root directory of this project, run `python manage.py runserver`.
 
 This will start up the server. You can view the demo in your browser at `http://localhost:8000/`.
+
+If you have JavaScript disabled in your browser, don't do that. That said, make sure you have Java Applets disabled. :)
 
 ## Brain-dead Forecasting in R
 Let's do some very simple forecasting in the R environment. Bring up an R shell in your environment of choice and enter the following commands:
@@ -69,3 +71,24 @@ predict(hw, 24)
 list(predict(hw, 24)) 
 ```
 
+## Graphing
+Now the trick is to get these values into a format so that JavaScript can plot them into a chart onto a web page. Dygraphs expects a CSV, presented as a string. The CSV looks like this:
+
+Date,Historical,Forecast
+1949-01-01,100,
+1949-02-01,120,
+... etc ...
+1961-01-01,,450
+1961-02-01,,430
+... etc ...
+
+Note that the earlier rows are missing Forecast values, and the later rows are missing Historical ones. This tells Dygraphs to plot two separate series on the same graph, visually distinguishing historical from forecast data.
+
+## Exploring the Code
+The code that generates the forecasts and builds the CSV string for the chart can be found in the `tsj_app/pythonr.py` file.
+
+The Python and Django code that loads the web page (at http://localhost:8000) is inside of `tsj_app/views.py`.
+
+The HTML for the home page is inside of `templates/index.html`. Note the empty div with an id of "chart" that will hold the chart.
+
+The JavaScript to build the chart itself is located in `media/js/tsj/tsj.js`. This JavaScript file just loads the CSV data, builds the chart, and renders it into the div#chart element in the template.
